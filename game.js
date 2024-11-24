@@ -1,7 +1,19 @@
 function setup() {
-  createCanvas(800, 600);
+  createCanvas(600, 900);
 }
-
+let state = "start";
+function preload() {
+  startBackground = loadImage("1234.jpg");
+  rulesBackground = loadImage(".jpg");
+  menueBackground = loadImage(".jpg");
+  winBackground = loadImage(".jpg");
+  lostBackground = loadImage(".jpg");
+}
 function draw() {
-  background(255, 140, 0);
+  if (state === "start") {
+    startScreen();
+  }
+}
+function startScreen() {
+  image(startBackground, 0, 0, 600, 900);
 }

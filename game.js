@@ -17,9 +17,9 @@ let state = "menue";
 const rulesButton = new Button(235, 380, 150, 75, "rules");
 const startButtomStartScreen = new CircleButtom(300, 770, 100, 100, "start");
 const startButtomRulesScreen = new CircleButtom(480, 650, 100, 100, "start");
-const suitColorRed = new Button(100, 380, 150, 75, "Red");
-const suitColorBlue = new Button(200, 380, 150, 75, "Blue");
-const suitColorGray = new Button(300, 380, 150, 75, "Gray");
+const suitColorRed = new Button(50, 380, 150, 75, "Red", 255, 0, 0);
+const suitColorBlue = new Button(230, 380, 150, 75, "Blue", 0, 0, 255);
+const suitColorGray = new Button(420, 380, 150, 75, "Gray", 200, 200, 200);
 let ironMan = new IronMan(150, 100);
 function mouseClicked() {
   if (
@@ -90,16 +90,15 @@ function rulesScreen() {
 }
 
 function menueScreen() {
-  background(255);
-  push();
-  fill(255);
+  background(0);
   suitColorRed.draw();
-  pop();
   suitColorBlue.draw();
   suitColorGray.draw();
 
   ironMan.update();
   ironMan.draw();
+  fill(255, 0, 255);
+  rect(60, 500, 500, 100, 20);
 }
 
 function gameScreen() {}

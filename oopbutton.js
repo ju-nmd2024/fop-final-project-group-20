@@ -1,10 +1,13 @@
 export default class Button {
-  constructor(x, y, width, height, text) {
+  constructor(x, y, width, height, text, fill1, fill2, fill3) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
     this.text = text;
+    this.fill1 = fill1;
+    this.fill2 = fill2;
+    this.fill3 = fill3;
   }
 
   draw() {
@@ -12,7 +15,7 @@ export default class Button {
     translate(this.x, this.y);
     stroke(0);
     strokeWeight(5);
-    fill(200, 256, 40);
+    fill(this.fill1, this.fill2, this.fill3);
     rect(0, 0, this.width, this.height, this.height / 3);
     // text structure
     noStroke();

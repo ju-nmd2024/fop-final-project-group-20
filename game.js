@@ -1,7 +1,7 @@
 function setup() {
   createCanvas(600, 900);
 }
-import IronMan from "./OOP IronMan.js";
+import IronMan from "./oopIronMan.js";
 import Button from "./oopbutton.js";
 import CircleButtom from "./oopcircleButtom.js";
 function preload() {
@@ -20,7 +20,7 @@ const startButtomRulesScreen = new CircleButtom(480, 650, 100, 100, "start");
 const suitColorRed = new Button(100, 380, 150, 75, "Red");
 const suitColorBlue = new Button(200, 380, 150, 75, "Blue");
 const suitColorGray = new Button(300, 380, 150, 75, "Gray");
-let ironMan = new IronMan(100, 100);
+let ironMan = new IronMan(150, 100);
 function mouseClicked() {
   if (
     state === "start" &&
@@ -91,9 +91,13 @@ function rulesScreen() {
 
 function menueScreen() {
   background(255);
+  push();
+  fill(255);
   suitColorRed.draw();
+  pop();
   suitColorBlue.draw();
   suitColorGray.draw();
+
   ironMan.update();
   ironMan.draw();
 }

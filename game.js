@@ -1,7 +1,7 @@
 function setup() {
   createCanvas(600, 900);
 }
-
+import IronMan from "./OOP IronMan.js";
 import Button from "./oopbutton.js";
 import CircleButtom from "./oopcircleButtom.js";
 function preload() {
@@ -12,11 +12,15 @@ function preload() {
   //lostBackground = loadImage(".jpg");
 }
 
-let state = "start";
+let state = "menue";
 
 const rulesButton = new Button(235, 380, 150, 75, "rules");
-const startButtom = new CircleButtom(300, 770, 100, 100, "start");
-
+const startButtomStartScreen = new CircleButtom(300, 770, 100, 100, "start");
+const startButtomRulesScreen = new CircleButtom(480, 650, 100, 100, "start");
+const suitColorRed = new Button(100, 380, 150, 75, "Red");
+const suitColorBlue = new Button(200, 380, 150, 75, "Blue");
+const suitColorGray = new Button(300, 380, 150, 75, "Gray");
+let ironMan = new IronMan(100, 100);
 function mouseClicked() {
   if (
     state === "start" &&
@@ -76,14 +80,22 @@ function draw() {
 function startScreen() {
   image(startBackground, 0, 0, 600, 900);
   rulesButton.draw();
-  startButtom.draw();
+  startButtomStartScreen.draw();
 }
 function rulesScreen() {
   image(rulesBackground, 0, 0, 600, 900);
+  fill(255, 0, 0);
+  rect(380, 350, 200, 300, 18);
+  startButtomRulesScreen.draw();
 }
 
 function menueScreen() {
-  background(250);
+  background(255);
+  suitColorRed.draw();
+  suitColorBlue.draw();
+  suitColorGray.draw();
+  ironMan.update();
+  ironMan.draw();
 }
 
 function gameScreen() {}

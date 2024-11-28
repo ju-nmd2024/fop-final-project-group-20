@@ -1,4 +1,4 @@
-export default class Button {
+export default class CircleButtom {
   constructor(x, y, width, height, text) {
     this.x = x;
     this.y = y;
@@ -12,24 +12,15 @@ export default class Button {
     translate(this.x, this.y);
     stroke(0);
     strokeWeight(5);
-    fill(200, 256, 40);
-    rect(0, 0, this.width, this.height, this.height / 3);
+    fill(200, 0, 255);
+    ellipse(0, 0, this.width, this.height);
     // text structure
     noStroke();
     fill(0);
     textSize(this.height / 4);
     textAlign(CENTER);
-    text(this.text, 0, this.height / 3, this.width);
+    text(this.text, 0, 0);
 
     pop();
   }
 }
-
-//const rulesButton = new Button(10, 10, 200, 100, "Start Game");
-/* const levelEasy =
-const levelHard=
-const color1=
-const color2=
-const color3=
-const winButton=
-const againButton= */

@@ -31,8 +31,8 @@ const playAgainGameOver = new Button(
   255,
   0
 );
-let ironMan = new IronMan(150, 100);
-let jetGame = new Jet(100, 100);
+let ironMan = new IronMan(150, 100,1);
+let ironManGame = new IronMan(150, 100,0.8);
 function mouseClicked() {
   if (
     state === "start" &&
@@ -44,40 +44,28 @@ function mouseClicked() {
     state = "rules";
   else if (
     state === "rules" &&
-    mouseX > 430 &&
-    mouseX < 530 &&
-    mouseY > 600 &&
-    mouseY < 700
-  )
-    state = "game";
-  else if (
-    state === "win" &&
-    mouseX > 230 &&
-    mouseX < 380 &&
-    mouseY > 800 &&
-    mouseY < 875
+    mouseX > 185 &&
+    mouseX < 285 &&
+    mouseY > 300 &&
+    mouseY < 350
   )
     state = "game";
   else if (
     state === "lost" &&
-    mouseX > 215 &&
-    mouseX < 415 &&
-    mouseY > 800 &&
-    mouseY < 875
+    mouseX > 350 &&
+    mouseX < 450 &&
+    mouseY > 300 &&
+    mouseY < 350
+  )
+    state = "game";
+  else if (
+    state === "won" &&
+    mouseX > 245 &&
+    mouseX < 377 &&
+    mouseY > 300 &&
+    mouseY < 364
   ) {
     state = "game";
-  } else if (
-    (state =
-      "menue" && mouseX > 50 && mouseX < 200 && mouseY > 385 && mouseY < 450)
-  ) {
-  } else if (
-    (state =
-      "menue" && mouseX > 235 && mouseX < 375 && mouseY > 385 && mouseY < 450)
-  ) {
-  } else if (
-    (state =
-      "menue" && mouseX > 420 && mouseX < 570 && mouseY > 385 && mouseY < 450)
-  ) {
   }
 }
 function draw() {
@@ -129,7 +117,8 @@ function menueScreen() {
 
 function gameScreen() {
   background(255);
-  jetGame.draw();
+ ironManGame.draw();
+ jet.draw();
 }
 
 function winScreen() {

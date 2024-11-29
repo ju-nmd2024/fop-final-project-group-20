@@ -7,9 +7,8 @@ import CircleButtom from "./oopcircleButtom.js";
 function preload() {
   startBackground = loadImage("1234.jpg");
   rulesBackground = loadImage("123.jpg");
-  //menueBackground = loadImage(".jpg");
-  //winBackground = loadImage(".jpg");
-  //lostBackground = loadImage(".jpg");
+  winBackground = loadImage("12345.jpg");
+  lostBackground = loadImage("2131012.jpg");
 }
 
 let state = "menue";
@@ -20,6 +19,17 @@ const startButtomRulesScreen = new CircleButtom(480, 650, 100, 100, "start");
 const suitColorRed = new Button(50, 380, 150, 75, "Red", 255, 0, 0);
 const suitColorBlue = new Button(230, 380, 150, 75, "Blue", 0, 0, 255);
 const suitColorGray = new Button(420, 380, 150, 75, "Gray", 200, 200, 200);
+const playAgain = new Button(230, 800, 150, 75, "play again", 255, 0, 255);
+const playAgainGameOver = new Button(
+  215,
+  800,
+  200,
+  75,
+  "play again",
+  0,
+  255,
+  0
+);
 let ironMan = new IronMan(150, 100);
 function mouseClicked() {
   if (
@@ -99,10 +109,18 @@ function menueScreen() {
   ironMan.draw();
   fill(255, 0, 255);
   rect(60, 500, 500, 100, 20);
+
+  startButtomStartScreen.draw();
 }
 
 function gameScreen() {}
 
-function winScreen() {}
+function winScreen() {
+  image(winBackground, 0, 0, 600, 900);
+  playAgain.draw();
+}
 
-function lostScreen() {}
+function lostScreen() {
+  image(lostBackground, 0, 0, 600, 900);
+  playAgainGameOver.draw();
+}

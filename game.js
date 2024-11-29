@@ -33,6 +33,8 @@ const playAgainGameOver = new Button(
 );
 let ironMan = new IronMan(150, 100,1);
 let ironManGame = new IronMan(150, 100,0.8);
+let jetGame = new Jet(100, 100);
+
 function mouseClicked() {
   if (
     state === "start" &&
@@ -118,7 +120,7 @@ function menueScreen() {
 function gameScreen() {
   background(255);
  ironManGame.draw();
- jet.draw();
+ jetGame.draw();
 }
 
 function winScreen() {

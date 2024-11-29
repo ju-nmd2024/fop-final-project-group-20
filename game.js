@@ -1,6 +1,7 @@
 function setup() {
   createCanvas(600, 900);
 }
+import Jet from "./Jet.js";
 import IronMan from "./oopIronMan.js";
 import Button from "./oopbutton.js";
 import CircleButtom from "./oopcircleButtom.js";
@@ -11,7 +12,7 @@ function preload() {
   lostBackground = loadImage("2131012.jpg");
 }
 
-let state = "menue";
+let state = "game";
 
 const rulesButton = new Button(235, 380, 150, 75, "rules");
 const startButtomStartScreen = new CircleButtom(300, 770, 100, 100, "start");
@@ -31,6 +32,7 @@ const playAgainGameOver = new Button(
   0
 );
 let ironMan = new IronMan(150, 100);
+let jetGame = new Jet(100, 100);
 function mouseClicked() {
   if (
     state === "start" &&
@@ -42,28 +44,40 @@ function mouseClicked() {
     state = "rules";
   else if (
     state === "rules" &&
-    mouseX > 185 &&
-    mouseX < 285 &&
-    mouseY > 300 &&
-    mouseY < 350
+    mouseX > 430 &&
+    mouseX < 530 &&
+    mouseY > 600 &&
+    mouseY < 700
+  )
+    state = "game";
+  else if (
+    state === "win" &&
+    mouseX > 230 &&
+    mouseX < 380 &&
+    mouseY > 800 &&
+    mouseY < 875
   )
     state = "game";
   else if (
     state === "lost" &&
-    mouseX > 350 &&
-    mouseX < 450 &&
-    mouseY > 300 &&
-    mouseY < 350
-  )
-    state = "game";
-  else if (
-    state === "won" &&
-    mouseX > 245 &&
-    mouseX < 377 &&
-    mouseY > 300 &&
-    mouseY < 364
+    mouseX > 215 &&
+    mouseX < 415 &&
+    mouseY > 800 &&
+    mouseY < 875
   ) {
     state = "game";
+  } else if (
+    (state =
+      "menue" && mouseX > 50 && mouseX < 200 && mouseY > 385 && mouseY < 450)
+  ) {
+  } else if (
+    (state =
+      "menue" && mouseX > 235 && mouseX < 375 && mouseY > 385 && mouseY < 450)
+  ) {
+  } else if (
+    (state =
+      "menue" && mouseX > 420 && mouseX < 570 && mouseY > 385 && mouseY < 450)
+  ) {
   }
 }
 function draw() {
@@ -113,7 +127,10 @@ function menueScreen() {
   startButtomStartScreen.draw();
 }
 
-function gameScreen() {}
+function gameScreen() {
+  background(255);
+  jetGame.draw();
+}
 
 function winScreen() {
   image(winBackground, 0, 0, 600, 900);

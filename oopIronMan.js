@@ -1,11 +1,12 @@
-export default class IronMan {
-  constructor(x, y) {
+  export default class IronMan {
+  constructor(x, y, s) {
     this.x = x;
     this.y = y;
     this.time = 0;
     this.redColor = color(200, 0, 0);
     this.goldColor = color(255, 200, 0);
     this.blueColor = color(0, 200, 255);
+    this.size = s;
   }
   update() {
     this.time += 0.05;
@@ -23,55 +24,55 @@ export default class IronMan {
 
   drawBody() {
     fill(this.redColor);
-    rect(this.x - 40, this.y - 20, 80, 100, 5);
+    rect(this.x - 40 * this.size, this.y - 20 * this.size, 80 * this.size, 100 * this.size, 5 * this.size);
 
     // gold part
     fill(this.goldColor);
-    rect(this.x - 30, this.y + 20, 60, 10);
+    rect(this.x - 30 * this.size, this.y + 20 * this.size, 60 * this.size, 10 * this.size);
   }
 
   drawHead() {
     fill(this.redColor);
-    ellipse(this.x, this.y - 50, 80, 90);
+    ellipse(this.x, this.y - 50 * this.size, 80 * this.size, 90 * this.size);
 
     // face
     fill(this.goldColor);
-    rect(this.x - 30, this.y - 70, 60, 40, 10);
+    rect(this.x - 30 * this.size, this.y - 70 * this.size, 60 * this.size, 40 * this.size, 10 * this.size);
 
     //eyes
     let eyeGlow = this.time;
     fill(this.blueColor, eyeGlow);
-    ellipse(this.x - 15, this.y - 55, 20, 10);
-    ellipse(this.x + 15, this.y - 55, 20, 10);
+    ellipse(this.x - 15 * this.size, this.y - 55 * this.size, 20 * this.size, 10 * this.size);
+    ellipse(this.x + 15 * this.size, this.y - 55 * this.size, 20 * this.size, 10 * this.size);
   }
   drawArm() {
     fill(this.redColor);
-    rect(this.x - 60, this.y - 20, 20, 80, 5);
-    rect(this.x + 40, this.y - 20, 20, 80, 5);
+    rect(this.x - 60 * this.size, this.y - 20 * this.size, 20 * this.size, 80 * this.size, 5 * this.size);
+    rect(this.x + 40 * this.size, this.y - 20 * this.size, 20 * this.size, 80 * this.size, 5 * this.size);
   }
 
   drawLeg() {
     fill(this.redColor);
-    rect(this.x - 30, this.y + 80, 25, 70, 5);
-    rect(this.x + 5, this.y + 80, 25, 70, 5);
+    rect(this.x - 30 * this.size, this.y + 80 * this.size, 25 * this.size, 70 * this.size, 5 * this.size);
+    rect(this.x + 5 * this.size, this.y + 80 * this.size, 25 * this.size, 70 * this.size, 5 * this.size);
   }
   drawJetpack() {
     if (mouseIsPressed) {
       fill(this.blueColor, 100);
-      ellipse(this.x - 20, this.y + 150, 15, 30);
-      ellipse(this.x + 20, this.y + 150, 15, 30);
+      ellipse(this.x - 20 * this.size, this.y + 150 * this.size, 15 * this.size, 30 * this.size);
+      ellipse(this.x + 20 * this.size, this.y + 150 * this.size, 15 * this.size, 30 * this.size);
     }
   }
   draw() {
     push();
     translate(this.x, this.y);
+    scale(this.size);
     this.drawJetpack();
     this.drawLeg();
     this.drawBody();
     this.drawReactor();
     this.drawArm();
     this.drawHead();
-
     pop();
   }
 }

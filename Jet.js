@@ -1,7 +1,8 @@
+
 let planeX = 300;
 let planeY = 200;
 
-class Jet{
+export default class Jet{
   constructor(x, y){
     this.x = x; 
     this.y = y;

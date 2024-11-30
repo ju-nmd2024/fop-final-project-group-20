@@ -157,14 +157,21 @@ if (shootLine.active){
    if (shootLine.active){
     let d = dist(mouseX, mouseY, jet[i].x + 20, jet[i].y + 20);
     if (d < 25) {
-      jet.splice(i, 1);
+      jets.splice(i, 1);
       jetCount--;
     }
    }
   }
 }
+function mousePressed() {
+  shootLine.active = true;
+  shootLine.startX = mouseX;
+  shootLine.startY = mouseY;
+}
 
-
+function mouseReleased() {
+  shootLine.active = false;
+}
 
 function winScreen() {
   image(winBackground, 0, 0, 600, 900);

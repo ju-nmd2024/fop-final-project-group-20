@@ -1,3 +1,11 @@
+let jets = [];
+let jetCount = 0;
+const maxJets = 10;
+let shootLine = {
+  active: false,
+  startX: 0,
+  startY: 0
+};
 function setup() {
   createCanvas(600, 900);
 }
@@ -119,9 +127,44 @@ function menueScreen() {
 
 function gameScreen() {
   background(255);
- ironManGame.draw();
- jetGame.draw();
+
+ if (keyIsDown(LEFT_ARROW)) {
+  ironManGame.x = ironManGame.x - 5;
+ }
+ if (keyIsDown(RIGHT_ARROW)) {
+  ironManGame.x = ironManGame.x + 5;
 }
+ironManGame.draw();
+
+if (frameCount % 60 === 0 && jetCount < maxJets){
+  jets.push(new Jet(random(width - 40), -50));
+  jetCount++;
+}
+// shoting line 
+if (shootLine.active){
+  stroke(255, 0, 0);
+  strokeWeight(2);
+  line(shootLine.startX, shootLine.startY, mouseX, mouseY);
+  }
+  for(let i = jets.length - 1; i>=0; i--){
+    jets[i].update();
+    jets[i].draw();
+    // remove jets 
+  if (jets[i].y > height){
+    jets.splice(i, 1);
+    jetCount--;
+   } 
+   if (shootLine.active){
+    let d = dist(mouseX, mouseY, jet[i].x + 20, jet[i].y + 20);
+    if (d < 25) {
+      jet.splice(i, 1);
+      jetCount--;
+    }
+   }
+  }
+}
+
+
 
 function winScreen() {
   image(winBackground, 0, 0, 600, 900);

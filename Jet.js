@@ -2,10 +2,15 @@
 let planeX = 300;
 let planeY = 200;
 
-export default class Jet{
+ export default class Jet{
   constructor(x, y){
     this.x = x; 
     this.y = y;
+    this.speed = 3;
+    
+  }
+  update(){
+    this.y += this.speed;
   }
   draw() {
     // jet

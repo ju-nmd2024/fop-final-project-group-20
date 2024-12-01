@@ -21,7 +21,7 @@ function preload() {
   hulk = loadImage("Hulk.jpg");
 }
 
-let state = "start";
+let state = "lost";
 
 const rulesButton = new Button(235, 380, 150, 75, "rules");
 const startButtomStartScreen = new CircleButtom(300, 770, 100, 100, "start");
@@ -57,26 +57,26 @@ function mouseClicked() {
     state = "rules";
   else if (
     state === "rules" &&
-    mouseX > 185 &&
-    mouseX < 285 &&
-    mouseY > 300 &&
-    mouseY < 350
+    mouseX > 430 &&
+    mouseX < 530 &&
+    mouseY > 620 &&
+    mouseY < 720
   )
     state = "game";
   else if (
     state === "lost" &&
-    mouseX > 350 &&
-    mouseX < 450 &&
-    mouseY > 300 &&
-    mouseY < 350
+    mouseX > 215 &&
+    mouseX < 415 &&
+    mouseY > 800 &&
+    mouseY < 875
   )
     state = "game";
   else if (
-    state === "won" &&
-    mouseX > 245 &&
-    mouseX < 377 &&
-    mouseY > 300 &&
-    mouseY < 364
+    state === "win" &&
+    mouseX > 230 &&
+    mouseX < 380 &&
+    mouseY > 800 &&
+    mouseY < 875
   ) {
     state = "game";
   }

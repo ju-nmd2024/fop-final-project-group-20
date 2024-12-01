@@ -27,12 +27,3 @@ export default class Button {
     pop();
   }
 }
-
-//const rulesButton = new Button(10, 10, 200, 100, "Start Game");
-/* const levelEasy =
-const levelHard=
-const color1=
-const color2=
-const color3=
-const winButton=
-const againButton= */

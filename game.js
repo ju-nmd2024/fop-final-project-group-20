@@ -4,7 +4,7 @@ const maxJets = 10;
 let shootLine = {
   active: false,
   startX: 0,
-  startY: 0
+  startY: 0,
 };
 function setup() {
   createCanvas(600, 900);
@@ -18,9 +18,10 @@ function preload() {
   rulesBackground = loadImage("123.jpg");
   winBackground = loadImage("12345.jpg");
   lostBackground = loadImage("2131012.jpg");
+  hulk = loadImage("Hulk.jpg");
 }
 
-let state = "game";
+let state = "start";
 
 const rulesButton = new Button(235, 380, 150, 75, "rules");
 const startButtomStartScreen = new CircleButtom(300, 770, 100, 100, "start");
@@ -39,10 +40,12 @@ const playAgainGameOver = new Button(
   255,
   0
 );
-let ironMan = new IronMan(150, 100,1);
-let ironManGame = new IronMan(150, 100,0.8);
+let ironMan = new IronMan(150, 100, 1);
+let ironManGame = new IronMan(150, 100, 0.8);
 let jetGame = new Jet(100, 100);
-
+function bossFighter(x, y, s) {
+  image(hulk, x, y, 100 * s, 100 * s);
+}
 function mouseClicked() {
   if (
     state === "start" &&
@@ -128,39 +131,39 @@ function menueScreen() {
 function gameScreen() {
   background(255);
 
- if (keyIsDown(LEFT_ARROW)) {
-  ironManGame.x = ironManGame.x - 5;
- }
- if (keyIsDown(RIGHT_ARROW)) {
-  ironManGame.x = ironManGame.x + 5;
-}
-ironManGame.draw();
-
-if (frameCount % 60 === 0 && jetCount < maxJets){
-  jets.push(new Jet(random(width - 40), -50));
-  jetCount++;
-}
-// shoting line 
-if (shootLine.active){
-  stroke(255, 0, 0);
-  strokeWeight(2);
-  line(shootLine.startX, shootLine.startY, mouseX, mouseY);
+  if (keyIsDown(LEFT_ARROW)) {
+    ironManGame.x = ironManGame.x - 5;
   }
-  for(let i = jets.length - 1; i>=0; i--){
+  if (keyIsDown(RIGHT_ARROW)) {
+    ironManGame.x = ironManGame.x + 5;
+  }
+  ironManGame.draw();
+
+  if (frameCount % 60 === 0 && jetCount < maxJets) {
+    jets.push(new Jet(random(width - 40), -50));
+    jetCount++;
+  }
+  // shoting line
+  if (shootLine.active) {
+    stroke(255, 0, 0);
+    strokeWeight(2);
+    line(shootLine.startX, shootLine.startY, mouseX, mouseY);
+  }
+  for (let i = jets.length - 1; i >= 0; i--) {
     jets[i].update();
     jets[i].draw();
-    // remove jets 
-  if (jets[i].y > height){
-    jets.splice(i, 1);
-    jetCount--;
-   } 
-   if (shootLine.active){
-    let d = dist(mouseX, mouseY, jet[i].x + 20, jet[i].y + 20);
-    if (d < 25) {
+    // remove jets
+    if (jets[i].y > height) {
       jets.splice(i, 1);
       jetCount--;
     }
-   }
+    if (shootLine.active) {
+      let d = dist(mouseX, mouseY, jet[i].x + 20, jet[i].y + 20);
+      if (d < 25) {
+        jets.splice(i, 1);
+        jetCount--;
+      }
+    }
   }
 }
 function mousePressed() {

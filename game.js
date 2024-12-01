@@ -158,7 +158,7 @@ function gameScreen() {
       jetCount--;
     }
     if (shootLine.active) {
-      let d = dist(mouseX, mouseY, jet[i].x + 20, jet[i].y + 20);
+      let d = dist(mouseX, mouseY, jets[i].x + 20, jets[i].y + 20);
       if (d < 25) {
         jets.splice(i, 1);
         jetCount--;

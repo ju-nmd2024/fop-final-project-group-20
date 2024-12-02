@@ -22,7 +22,7 @@ function preload() {
   rulesBackground = loadImage("123.jpg");
   winBackground = loadImage("12345.jpg");
   lostBackground = loadImage("2131012.jpg");
-  hulk = loadImage("Hulk.jpg");
+  hulk = loadImage("Hulk.png");
   gameBackground = loadImage("game.jpg");
 }
 
@@ -47,7 +47,6 @@ const playAgainGameOver = new Button(
 );
 let ironMan = new IronMan(150, 100, 1);
 let ironManGame = new IronMan(170, 400, 0.8);
-let jetGame = new Jet(100, 100);
 function bossFighter(x, y, s) {
   image(hulk, x, y, 100 * s, 100 * s);
 }

@@ -1,4 +1,6 @@
-
+let missile = [];
+let missileDestroy = 0;
+let level = 1;
 let jets = [];
 let jetDestroyCount = 0;
 const maxJets = 10;
@@ -11,6 +13,7 @@ let shootLine = {
 function setup() {
   createCanvas(600, 900);
 }
+import Missile from "./missile.js";
 import Jet from "./Jet.js";
 import IronMan from "./oopIronMan.js";
 import Button from "./oopbutton.js";
@@ -132,9 +135,12 @@ function menueScreen() {
 
 function gameScreen() {
   background(255);
-
-  if (jetDestroyCount>=3) {
-    state = "win";
+// win condition 
+  if (level === 1 && jetDestroyCount>=5){
+    level = 2;
+    jetDestroyCount =0;
+  } else if ( level ===2 && jetDestroyCount>= 5&& missileDestroy>=5){
+    state ="win";
     return;
   }
   
@@ -146,30 +152,61 @@ function gameScreen() {
   }
   ironManGame.draw();
 
+   // jet spawn
   if (frameCount % 60 === 0 && jets.length < 5) {
     jets.push(new Jet(random(width - 40), -50));
   }
+
+  // missile spawn
+  if (level === 2&& frameCount % 90 === 0 && missile.length<3){
+    missile.push(new Missile(random(width - 40), - 50));
+  }
+
   for (let i = jets.length - 1; i >=0; i--) {
     jets[i].update();
     jets[i].draw();
 
-    if (jets[i].y>height){
-      jets.splice(i, 1);
-    }
-    // shoting line
+    let actualJetX = planeX + (jets[i].x - 100);
+    let actualJetY = planeY + (jets[i].y - 100);
 
-    // remove jets
-    // if (jets[i].y > height) {
-    //   jets.splice(i, 1);
-    // }
-    // if (shootLine.active) {
-    //   let d = dist(mouseX, mouseY, jets[i].x + 20, jets[i].y + 20);
-    //   if (d < 25) {
-    //     jets.splice(i, 1);
-    //     jetCount--;
-    //   }
-    // }
+    if (actualJetX >= ironManGame.x - 40 &&
+      actualJetX<= ironManGame.x + 40&&
+      actualJetY>= ironManGame.y - 40&&
+      actualJetY<= ironManGame.y +40){
+        state = "lost";
+        return;
+      }
+
+    if (jets[i].y>height){
+     state = "lost";
+     return;
+    }
   }
+
+  if ( level === 2){
+    for(let i = missile.length - 1; i>= 0; i--){
+      missile[i].update();
+      missile[i].draw();
+
+      let actualMissileX = missile[i].x;
+      let actualMissileY = missile[i].y;
+
+      if(actualMissileX >= ironManGame.x - 30&&
+        actualMissileX<= ironManGame.x + 30&&
+        actualMissileY >= ironManGame.y -30&&
+        actualMissileY <= ironManGame.y +30){
+          state = "lost";
+          return;
+        }
+
+      if (missile[i].y > height){
+        state = "lost";
+        return;
+      }
+    }
+  }
+
+
   if (shootLine.active) {
     stroke(255, 0, 0);
     strokeWeight(2);
@@ -184,6 +221,7 @@ function mousePressed() {
 
 function mouseReleased() {
   shootLine.active = false;
+
   for (let i = jets.length - 1; i>= 0; i--){
     let actualJetX = planeX + (jets[i].x - 100);
     let actualJetY = planeY + (jets[i].y - 100);
@@ -195,11 +233,31 @@ function mouseReleased() {
           jets.splice(i, 1);
           jetDestroyCount++;
 
-          if (jetDestroyCount >=3){
+          if (level === 1&& jetDestroyCount >=5){
+            level = 2;
+            jetDestroyCount = 0;
+          }
+          break;
+        }
+  }
+  if(level === 2){
+    for(let i = missile.length - 1; i>=0; i--){
+      let actualMissileX = missile[i].x;
+      let actualMissileY = missile[i].y;
+      
+      if(mouseX >= actualMissileX -25&&
+        mouseX <= actualMissileX + 25&&
+        mouseY >= actualMissileY - 25&&
+        mouseY<= actualMissileY + 25){
+          missile.splice(i, 1);
+          missileDestroy++;
+
+          if(jetDestroyCount>= 5&& missileDestroy>= 5){
             state = "win";
           }
           break;
         }
+    }
   }
 }
 

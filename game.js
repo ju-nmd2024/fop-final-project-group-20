@@ -1,10 +1,13 @@
+
 let jets = [];
+let jetDestroyCount = 0;
 const maxJets = 10;
 let shootLine = {
   active: false,
   startX: 0,
   startY: 0,
 };
+
 function setup() {
   createCanvas(600, 900);
 }
@@ -20,7 +23,7 @@ function preload() {
   hulk = loadImage("Hulk.jpg");
 }
 
-let state = "game";
+let state = "start";
 
 const rulesButton = new Button(235, 380, 150, 75, "rules");
 const startButtomStartScreen = new CircleButtom(300, 770, 100, 100, "start");
@@ -130,6 +133,11 @@ function menueScreen() {
 function gameScreen() {
   background(255);
 
+  if (jetDestroyCount>=3) {
+    state = "win";
+    return;
+  }
+  
   if (keyIsDown(LEFT_ARROW)) {
     ironManGame.x = ironManGame.x - 5;
   }
@@ -138,30 +146,34 @@ function gameScreen() {
   }
   ironManGame.draw();
 
-  if (frameCount % 60 === 0 && jets.length < maxJets) {
+  if (frameCount % 60 === 0 && jets.length < 5) {
     jets.push(new Jet(random(width - 40), -50));
   }
-  for (let i = 0; i <= jets.length - 1; i++) {
+  for (let i = jets.length - 1; i >=0; i--) {
     jets[i].update();
     jets[i].draw();
-    // shoting line
-    if (shootLine.active) {
-      stroke(255, 0, 0);
-      strokeWeight(2);
-      line(shootLine.startX, shootLine.startY, mouseX, mouseY);
-    }
 
-    // remove jets
-    if (jets[i].y > height) {
+    if (jets[i].y>height){
       jets.splice(i, 1);
     }
-    if (shootLine.active) {
-      let d = dist(mouseX, mouseY, jets[i].x + 20, jets[i].y + 20);
-      if (d < 25) {
-        jets.splice(i, 1);
-        jetCount--;
-      }
-    }
+    // shoting line
+
+    // remove jets
+    // if (jets[i].y > height) {
+    //   jets.splice(i, 1);
+    // }
+    // if (shootLine.active) {
+    //   let d = dist(mouseX, mouseY, jets[i].x + 20, jets[i].y + 20);
+    //   if (d < 25) {
+    //     jets.splice(i, 1);
+    //     jetCount--;
+    //   }
+    // }
+  }
+  if (shootLine.active) {
+    stroke(255, 0, 0);
+    strokeWeight(2);
+    line(shootLine.startX, shootLine.startY, mouseX, mouseY);
   }
 }
 function mousePressed() {
@@ -172,6 +184,23 @@ function mousePressed() {
 
 function mouseReleased() {
   shootLine.active = false;
+  for (let i = jets.length - 1; i>= 0; i--){
+    let actualJetX = planeX + (jets[i].x - 100);
+    let actualJetY = planeY + (jets[i].y - 100);
+
+    if (mouseX >= actualJetX - 50 &&
+        mouseX <= actualJetX + 50 &&
+        mouseY >= actualJetY - 25 &&
+        mouseY <= actualJetY + 25){
+          jets.splice(i, 1);
+          jetDestroyCount++;
+
+          if (jetDestroyCount >=3){
+            state = "win";
+          }
+          break;
+        }
+  }
 }
 
 function winScreen() {

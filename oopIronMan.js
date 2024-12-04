@@ -1,4 +1,4 @@
-  export default class IronMan {
+export default class IronMan {
   constructor(x, y, s) {
     this.x = x;
     this.y = y;
@@ -24,11 +24,22 @@
 
   drawBody() {
     fill(this.redColor);
-    rect(this.x - 40 * this.size, this.y - 20 * this.size, 80 * this.size, 100 * this.size, 5 * this.size);
+    rect(
+      this.x - 40 * this.size,
+      this.y - 20 * this.size,
+      80 * this.size,
+      100 * this.size,
+      5 * this.size
+    );
 
     // gold part
     fill(this.goldColor);
-    rect(this.x - 30 * this.size, this.y + 20 * this.size, 60 * this.size, 10 * this.size);
+    rect(
+      this.x - 30 * this.size,
+      this.y + 20 * this.size,
+      60 * this.size,
+      10 * this.size
+    );
   }
 
   drawHead() {
@@ -37,35 +48,85 @@
 
     // face
     fill(this.goldColor);
-    rect(this.x - 30 * this.size, this.y - 70 * this.size, 60 * this.size, 40 * this.size, 10 * this.size);
+    rect(
+      this.x - 30 * this.size,
+      this.y - 70 * this.size,
+      60 * this.size,
+      40 * this.size,
+      10 * this.size
+    );
 
     //eyes
     let eyeGlow = this.time;
     fill(this.blueColor, eyeGlow);
-    ellipse(this.x - 15 * this.size, this.y - 55 * this.size, 20 * this.size, 10 * this.size);
-    ellipse(this.x + 15 * this.size, this.y - 55 * this.size, 20 * this.size, 10 * this.size);
+    ellipse(
+      this.x - 15 * this.size,
+      this.y - 55 * this.size,
+      20 * this.size,
+      10 * this.size
+    );
+    ellipse(
+      this.x + 15 * this.size,
+      this.y - 55 * this.size,
+      20 * this.size,
+      10 * this.size
+    );
   }
   drawArm() {
     fill(this.redColor);
-    rect(this.x - 60 * this.size, this.y - 20 * this.size, 20 * this.size, 80 * this.size, 5 * this.size);
-    rect(this.x + 40 * this.size, this.y - 20 * this.size, 20 * this.size, 80 * this.size, 5 * this.size);
+    rect(
+      this.x - 60 * this.size,
+      this.y - 20 * this.size,
+      20 * this.size,
+      80 * this.size,
+      5 * this.size
+    );
+    rect(
+      this.x + 40 * this.size,
+      this.y - 20 * this.size,
+      20 * this.size,
+      80 * this.size,
+      5 * this.size
+    );
   }
 
   drawLeg() {
     fill(this.redColor);
-    rect(this.x - 30 * this.size, this.y + 80 * this.size, 25 * this.size, 70 * this.size, 5 * this.size);
-    rect(this.x + 5 * this.size, this.y + 80 * this.size, 25 * this.size, 70 * this.size, 5 * this.size);
+    rect(
+      this.x - 30 * this.size,
+      this.y + 80 * this.size,
+      25 * this.size,
+      70 * this.size,
+      5 * this.size
+    );
+    rect(
+      this.x + 5 * this.size,
+      this.y + 80 * this.size,
+      25 * this.size,
+      70 * this.size,
+      5 * this.size
+    );
   }
   drawJetpack() {
     if (mouseIsPressed) {
       fill(this.blueColor, 100);
-      ellipse(this.x - 20 * this.size, this.y + 150 * this.size, 15 * this.size, 30 * this.size);
-      ellipse(this.x + 20 * this.size, this.y + 150 * this.size, 15 * this.size, 30 * this.size);
+      ellipse(
+        this.x - 20 * this.size,
+        this.y + 150 * this.size,
+        15 * this.size,
+        30 * this.size
+      );
+      ellipse(
+        this.x + 20 * this.size,
+        this.y + 150 * this.size,
+        15 * this.size,
+        30 * this.size
+      );
     }
   }
   draw() {
     push();
-    translate(this.x, this.y);
+    //translate(this.x, this.y);
     scale(this.size);
     this.drawJetpack();
     this.drawLeg();

@@ -8,7 +8,10 @@ let shootLine = {
   startX: 0,
   startY: 0,
 };
-
+let bossX = 300;
+let bossY = 100;
+let clickOnBoss = 0;
+let time = 0;
 function setup() {
   createCanvas(600, 900);
 }
@@ -46,9 +49,22 @@ const playAgainGameOver = new Button(
   0
 );
 let ironMan = new IronMan(150, 100, 1);
-let ironManGame = new IronMan(170, 400, 0.8);
-function bossFighter(x, y, s) {
-  image(hulk, x, y, 100 * s, 100 * s);
+let ironManGame = new IronMan(400, 850, 0.8);
+// we use AI to finf a solution for reset the game in different states : https://chatgpt.com/share/67508cdb-a400-8004-97f1-40834a22d34c
+function resetGame() {
+  missile = [];
+  missileDestroy = 0;
+  level = 1;
+  jets = [];
+  jetDestroyCount = 0;
+  shootLine = {
+    active: false,
+    startX: 0,
+    startY: 0,
+  };
+  clickOnBoss = 0;
+  time = 0;
+  bossX = 300;
 }
 function mouseClicked() {
   if (
@@ -57,31 +73,34 @@ function mouseClicked() {
     mouseX < 383 &&
     mouseY > 380 &&
     mouseY < 450
-  )
+  ) {
     state = "rules";
-  else if (
+  } else if (
     state === "rules" &&
     mouseX > 430 &&
     mouseX < 530 &&
     mouseY > 620 &&
     mouseY < 720
-  )
+  ) {
+    resetGame();
     state = "game";
-  else if (
+  } else if (
     state === "lost" &&
     mouseX > 215 &&
     mouseX < 415 &&
     mouseY > 800 &&
     mouseY < 875
-  )
+  ) {
+    resetGame();
     state = "rules";
-  else if (
+  } else if (
     state === "win" &&
     mouseX > 230 &&
     mouseX < 380 &&
     mouseY > 800 &&
     mouseY < 875
   ) {
+    resetGame();
     state = "game";
   }
 }
@@ -139,8 +158,7 @@ function gameScreen() {
     level = 2;
     jetDestroyCount = 0;
   } else if (level === 2 && jetDestroyCount >= 5 && missileDestroy >= 5) {
-    state = "win";
-    return;
+    level = 3;
   }
 
   if (keyIsDown(LEFT_ARROW)) {
@@ -183,7 +201,7 @@ function gameScreen() {
       return;
     }
   }
-
+  // missle spawn
   if (level === 2) {
     for (let i = missile.length - 1; i >= 0; i--) {
       missile[i].update();
@@ -208,17 +226,62 @@ function gameScreen() {
       }
     }
   }
+  if (level === 3) {
+    bossX += 2;
+    if (bossX > 500) {
+      bossX = 100;
+    }
+    image(hulk, bossX, bossY, 150, 150);
+    fill(255);
+    textSize(30);
+    text("Hits needed" + (3 - clickOnBoss), 20, 50);
+  }
+  if (level === 3 && clickOnBoss > 0) {
+    if (millis() - time > 5000) {
+      state = "lost";
+      clickOnBoss = 0;
+    }
+  }
 
   if (shootLine.active) {
     stroke(255, 0, 0);
     strokeWeight(2);
-    line(shootLine.startX, shootLine.startY, mouseX, mouseY);
+    line(shootLine.startX, shootLine.startY, shootLine.endX, shootLine.endY);
+    shootLine.active = false;
   }
 }
 function mousePressed() {
   shootLine.active = true;
-  shootLine.startX = mouseX;
-  shootLine.startY = mouseY;
+  shootLine.startX = ironManGame.x - 80;
+  shootLine.startY = ironManGame.y - 170;
+  shootLine.endX = mouseX;
+  shootLine.endY = mouseY;
+  if (level === 3) {
+    if (
+      mouseX > bossX &&
+      mouseX < bossX + 150 &&
+      mouseY > bossY &&
+      mouseY < bossY + 150
+    ) {
+      if (clickOnBoss === 0) {
+        time = millis();
+      }
+      if (millis() - time > 5000) {
+        state = "lost";
+        clickOnBoss = 0;
+        return;
+      }
+      clickOnBoss++;
+      if (clickOnBoss === 3) {
+        if (millis() - time <= 5000) {
+          state = "win";
+        } else {
+          state = "lost";
+        }
+        clickOnBoss = 0;
+      }
+    }
+  }
 }
 
 function mouseReleased() {
@@ -259,7 +322,7 @@ function mouseReleased() {
         missileDestroy++;
 
         if (jetDestroyCount >= 5 && missileDestroy >= 5) {
-          state = "win";
+          level = 3;
         }
         break;
       }

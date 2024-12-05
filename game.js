@@ -22,15 +22,16 @@ import Jet from "./Jet.js";
 import IronMan from "./oopIronMan.js";
 import Button from "./oopbutton.js";
 import CircleButtom from "./oopcircleButtom.js";
-window.preload = preload;
+
 function preload() {
-  startBackground = loadImage("1234.jpg");
-  rulesBackground = loadImage("123.jpg");
-  winBackground = loadImage("12345.jpg");
-  lostBackground = loadImage("2131012.jpg");
-  hulk = loadImage("Hulk.png");
-  gameBackground = loadImage("game.jpg");
+  startBackground = loadImage("./1234.jpg");
+  rulesBackground = loadImage("./123.jpg");
+  winBackground = loadImage("./12345.jpg");
+  lostBackground = loadImage("./2131012.jpg");
+  hulk = loadImage("./Hulk.png");
+  gameBackground = loadImage("./game.jpg");
 }
+window.preload = preload;
 
 let state = "start";
 

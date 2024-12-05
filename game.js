@@ -31,7 +31,7 @@ function preload() {
 
 let state = "start";
 
-const rulesButton = new Button(235, 380, 150, 75, "rules");
+const rulesButton = new Button(235, 380, 150, 75, "rules",0,255,0);
 const startButtomRulesScreen = new CircleButtom(480, 650, 100, 100, "start");
 const playAgain = new Button(230, 800, 150, 75, "play again", 255, 0, 255);
 const playAgainGameOver = new Button(
@@ -87,7 +87,7 @@ function mouseClicked() {
     mouseY < 875
   ) {
     resetGame();
-    state = "rules";
+    state = "start";
   } else if (
     state === "win" &&
     mouseX > 230 &&

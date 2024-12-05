@@ -29,10 +29,9 @@ function preload() {
   gameBackground = loadImage("game.jpg");
 }
 
-let state = "rules";
+let state = "start";
 
 const rulesButton = new Button(235, 380, 150, 75, "rules");
-const startButtomStartScreen = new CircleButtom(300, 770, 100, 100, "start");
 const startButtomRulesScreen = new CircleButtom(480, 650, 100, 100, "start");
 const playAgain = new Button(230, 800, 150, 75, "play again", 255, 0, 255);
 const playAgainGameOver = new Button(
@@ -121,7 +120,6 @@ function draw() {
 function startScreen() {
   image(startBackground, 0, 0, 600, 900);
   rulesButton.draw();
-  startButtomStartScreen.draw();
 }
 function rulesScreen() {
   image(rulesBackground, 0, 0, 600, 900);

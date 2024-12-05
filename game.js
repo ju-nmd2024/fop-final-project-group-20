@@ -15,11 +15,14 @@ let time = 0;
 function setup() {
   createCanvas(600, 900);
 }
+window.setup = setup;
+
 import Missile from "./missile.js";
 import Jet from "./Jet.js";
 import IronMan from "./oopIronMan.js";
 import Button from "./oopbutton.js";
 import CircleButtom from "./oopcircleButtom.js";
+window.preload = preload;
 function preload() {
   startBackground = loadImage("1234.jpg");
   rulesBackground = loadImage("123.jpg");
@@ -61,6 +64,7 @@ function resetGame() {
   time = 0;
   bossX = 300;
 }
+window.mouseClicked = mouseClicked;
 function mouseClicked() {
   if (
     state === "start" &&
@@ -99,6 +103,7 @@ function mouseClicked() {
     state = "game";
   }
 }
+window.draw = draw;
 function draw() {
   if (state === "start") {
     startScreen();
@@ -252,6 +257,7 @@ function gameScreen() {
     shootLine.active = false;
   }
 }
+window.mousePressed = mousePressed;
 function mousePressed() {
   shootLine.active = true;
   shootLine.startX = ironManGame.x - 80;
@@ -285,7 +291,7 @@ function mousePressed() {
     }
   }
 }
-
+window.mouseReleased= mouseReleased;
 function mouseReleased() {
   shootLine.active = false;
 

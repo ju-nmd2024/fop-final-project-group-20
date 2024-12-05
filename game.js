@@ -2,8 +2,6 @@ let missile = [];
 let missileDestroy = 0;
 let level = 1;
 let jets = [];
-let ironManGameW = 30;
-let ironManGameH = 30;
 let jetDestroyCount = 0;
 let shootLine = {
   active: false,
@@ -31,7 +29,7 @@ function preload() {
   gameBackground = loadImage("game.jpg");
 }
 
-let state = "rules";
+let state = "start";
 
 const rulesButton = new Button(235, 380, 150, 75, "rules");
 const startButtomRulesScreen = new CircleButtom(480, 650, 100, 100, "start");

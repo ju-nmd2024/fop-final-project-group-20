@@ -2,6 +2,9 @@ let missile = [];
 let missileDestroy = 0;
 let level = 1;
 let jets = [];
+let planeX = 300;
+let planeY = 200;
+
 let jetDestroyCount = 0;
 let shootLine = {
   active: false,
@@ -14,6 +17,8 @@ let clickOnBoss = 0;
 let time = 0;
 function setup() {
   createCanvas(600, 900);
+
+  ironManGame = new IronMan(400, 850, 0.8);
 }
 window.setup = setup;
 
@@ -22,7 +27,12 @@ import Jet from "./Jet.js";
 import IronMan from "./oopIronMan.js";
 import Button from "./oopbutton.js";
 import CircleButtom from "./oopcircleButtom.js";
-
+let startBackground;
+let rulesBackground;
+let winBackground;
+let lostBackground;
+let hulk;
+let gameBackground;
 function preload() {
   startBackground = loadImage("./1234.jpg");
   rulesBackground = loadImage("./123.jpg");
@@ -35,7 +45,7 @@ window.preload = preload;
 
 let state = "start";
 
-const rulesButton = new Button(235, 380, 150, 75, "rules",0,255,0);
+const rulesButton = new Button(235, 380, 150, 75, "rules", 0, 255, 0);
 const startButtomRulesScreen = new CircleButtom(480, 650, 100, 100, "start");
 const playAgain = new Button(230, 800, 150, 75, "play again", 255, 0, 255);
 const playAgainGameOver = new Button(
@@ -48,7 +58,7 @@ const playAgainGameOver = new Button(
   255,
   0
 );
-let ironManGame = new IronMan(400, 850, 0.8);
+let ironManGame;
 // we use AI to find a solution for reset the game in different states : https://chatgpt.com/share/67508cdb-a400-8004-97f1-40834a22d34c
 function resetGame() {
   missile = [];
@@ -292,7 +302,7 @@ function mousePressed() {
     }
   }
 }
-window.mouseReleased= mouseReleased;
+window.mouseReleased = mouseReleased;
 function mouseReleased() {
   shootLine.active = false;
 

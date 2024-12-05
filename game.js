@@ -17,11 +17,11 @@ function setup() {
 }
 window.setup = setup;
 
-import Missile from "./missile.js";
-import Jet from "./Jet.js";
-import IronMan from "./oopIronMan.js";
-import Button from "./oopbutton.js";
-import CircleButtom from "./oopcircleButtom.js";
+import Missile from "missile.js";
+import Jet from "Jet.js";
+import IronMan from "oopIronMan.js";
+import Button from "oopbutton.js";
+import CircleButtom from "oopcircleButtom.js";
 window.preload = preload;
 function preload() {
   startBackground = loadImage("1234.jpg");

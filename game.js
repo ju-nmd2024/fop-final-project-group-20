@@ -29,14 +29,11 @@ function preload() {
   gameBackground = loadImage("game.jpg");
 }
 
-let state = "start";
+let state = "rules";
 
 const rulesButton = new Button(235, 380, 150, 75, "rules");
 const startButtomStartScreen = new CircleButtom(300, 770, 100, 100, "start");
 const startButtomRulesScreen = new CircleButtom(480, 650, 100, 100, "start");
-const suitColorRed = new Button(50, 380, 150, 75, "Red", 255, 0, 0);
-const suitColorBlue = new Button(230, 380, 150, 75, "Blue", 0, 0, 255);
-const suitColorGray = new Button(420, 380, 150, 75, "Gray", 200, 200, 200);
 const playAgain = new Button(230, 800, 150, 75, "play again", 255, 0, 255);
 const playAgainGameOver = new Button(
   215,
@@ -48,7 +45,6 @@ const playAgainGameOver = new Button(
   255,
   0
 );
-let ironMan = new IronMan(150, 100, 1);
 let ironManGame = new IronMan(400, 850, 0.8);
 // we use AI to finf a solution for reset the game in different states : https://chatgpt.com/share/67508cdb-a400-8004-97f1-40834a22d34c
 function resetGame() {
@@ -111,9 +107,6 @@ function draw() {
   if (state === "rules") {
     rulesScreen();
   }
-  if (state === "menue") {
-    menueScreen();
-  }
   if (state === "game") {
     gameScreen();
   }
@@ -132,23 +125,26 @@ function startScreen() {
 }
 function rulesScreen() {
   image(rulesBackground, 0, 0, 600, 900);
+  push();
   fill(255, 0, 0);
   rect(380, 350, 200, 300, 18);
   startButtomRulesScreen.draw();
-}
+  pop();
+  push();
+  text("there are three levels:", 400, 370);
+  text("in level 1 you have to kill 5 jets", 400, 390);
+  text("then you will go to level two", 400, 410);
+  text("in level 2 you should shot 5", 400, 430);
+  text("bombs and every jets", 400, 450);
+  text("then you will go to level 3", 400, 470);
+  text("in level 3 you should shot Boss", 400, 490);
+  text("three times in 5 secondes and ", 400, 510);
+  text("every jets are coming too", 400, 530);
+  text("tips: jets in level 2 and 3 are for ", 400, 550);
+  text("distracting but you should shot  ", 400, 570);
+  text("jets also to win ", 400, 590);
 
-function menueScreen() {
-  background(0);
-  suitColorRed.draw();
-  suitColorBlue.draw();
-  suitColorGray.draw();
-
-  ironMan.update();
-  ironMan.draw();
-  fill(255, 0, 255);
-  rect(60, 500, 500, 100, 20);
-
-  startButtomStartScreen.draw();
+  pop();
 }
 
 function gameScreen() {
@@ -245,7 +241,7 @@ function gameScreen() {
 
   if (shootLine.active) {
     stroke(255, 0, 0);
-    strokeWeight(2);
+    strokeWeight(3);
     line(shootLine.startX, shootLine.startY, shootLine.endX, shootLine.endY);
     shootLine.active = false;
   }

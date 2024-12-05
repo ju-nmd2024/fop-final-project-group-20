@@ -2,6 +2,8 @@ let missile = [];
 let missileDestroy = 0;
 let level = 1;
 let jets = [];
+let ironManGameW = 30;
+let ironManGameH = 30;
 let jetDestroyCount = 0;
 let shootLine = {
   active: false,
@@ -29,7 +31,7 @@ function preload() {
   gameBackground = loadImage("game.jpg");
 }
 
-let state = "start";
+let state = "rules";
 
 const rulesButton = new Button(235, 380, 150, 75, "rules");
 const startButtomRulesScreen = new CircleButtom(480, 650, 100, 100, "start");
@@ -125,22 +127,26 @@ function rulesScreen() {
   image(rulesBackground, 0, 0, 600, 900);
   push();
   fill(255, 0, 0);
-  rect(380, 350, 200, 300, 18);
+  rect(380, 300, 200, 350, 18);
   startButtomRulesScreen.draw();
   pop();
   push();
-  text("there are three levels:", 400, 370);
-  text("in level 1 you have to kill 5 jets", 400, 390);
-  text("then you will go to level two", 400, 410);
-  text("in level 2 you should shot 5", 400, 430);
-  text("bombs and every jets", 400, 450);
-  text("then you will go to level 3", 400, 470);
-  text("in level 3 you should shot Boss", 400, 490);
-  text("three times in 5 secondes and ", 400, 510);
-  text("every jets are coming too", 400, 530);
-  text("tips: jets in level 2 and 3 are for ", 400, 550);
-  text("distracting but you should shot  ", 400, 570);
-  text("jets also to win ", 400, 590);
+  fill(0, 0, 0);
+  text("there are three levels:", 400, 320);
+  text("in level 1 you have to kill 5 jets", 400, 340);
+  text("then you will go to level two", 400, 360);
+  text("in level 2 you should shot 5", 400, 380);
+  text("bombs and every jets", 400, 400);
+  text("then you will go to level 3", 400, 420);
+  text("in level 3 you should shot Boss", 400, 440);
+  text("three times in 5 secondes and ", 400, 460);
+  text("every jets are coming too", 400, 480);
+  text("tips: jets in level 2 and 3 are for ", 400, 500);
+  text("distracting but you should shot  ", 400, 520);
+  text("jets also to win ", 400, 540);
+  text("don't forget not to hit by enemies", 400, 560);
+  text("control ironman with left and right ", 400, 580);
+  text("arrow keys ", 400, 600);
 
   pop();
 }
@@ -181,10 +187,10 @@ function gameScreen() {
     let actualJetY = planeY + (jets[i].y - 100);
 
     if (
-      actualJetX >= ironManGame.x - 40 &&
-      actualJetX <= ironManGame.x + 40 &&
-      actualJetY >= ironManGame.y - 40 &&
-      actualJetY <= ironManGame.y + 40
+      actualJetX >= ironManGame.x - 260 &&
+      actualJetX <= ironManGame.x + 260 &&
+      actualJetY >= ironManGame.y - 260 &&
+      actualJetY <= ironManGame.y + 260
     ) {
       state = "lost";
       return;
@@ -205,10 +211,10 @@ function gameScreen() {
       let actualMissileY = missile[i].y;
 
       if (
-        actualMissileX >= ironManGame.x - 30 &&
-        actualMissileX <= ironManGame.x + 30 &&
-        actualMissileY >= ironManGame.y - 30 &&
-        actualMissileY <= ironManGame.y + 30
+        actualMissileX >= ironManGame.x - 260 &&
+        actualMissileX <= ironManGame.x + 260 &&
+        actualMissileY >= ironManGame.y - 260 &&
+        actualMissileY <= ironManGame.y + 260
       ) {
         state = "lost";
         return;

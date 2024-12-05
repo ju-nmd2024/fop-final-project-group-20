@@ -3,7 +3,7 @@ export default class IronMan {
     this.x = x;
     this.y = y;
     this.time = 0;
-    this.redColor = color(200, 0, 0);
+    // 200, 0, 0 = color(200, 0, 0);
     this.goldColor = color(255, 200, 0);
     this.blueColor = color(0, 200, 255);
     this.size = s;
@@ -23,7 +23,7 @@ export default class IronMan {
   }
 
   drawBody() {
-    fill(this.redColor);
+    fill(200, 0, 0);
     rect(
       this.x - 40 * this.size,
       this.y - 20 * this.size,
@@ -43,7 +43,7 @@ export default class IronMan {
   }
 
   drawHead() {
-    fill(this.redColor);
+    fill(200, 0, 0);
     ellipse(this.x, this.y - 50 * this.size, 80 * this.size, 90 * this.size);
 
     // face
@@ -73,7 +73,7 @@ export default class IronMan {
     );
   }
   drawArm() {
-    fill(this.redColor);
+    fill(200, 0, 0);
     rect(
       this.x - 60 * this.size,
       this.y - 20 * this.size,
@@ -91,7 +91,7 @@ export default class IronMan {
   }
 
   drawLeg() {
-    fill(this.redColor);
+    fill(200, 0, 0);
     rect(
       this.x - 30 * this.size,
       this.y + 80 * this.size,

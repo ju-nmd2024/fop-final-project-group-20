@@ -45,7 +45,7 @@ const playAgainGameOver = new Button(
   0
 );
 let ironManGame = new IronMan(400, 850, 0.8);
-// we use AI to finf a solution for reset the game in different states : https://chatgpt.com/share/67508cdb-a400-8004-97f1-40834a22d34c
+// we use AI to find a solution for reset the game in different states : https://chatgpt.com/share/67508cdb-a400-8004-97f1-40834a22d34c
 function resetGame() {
   missile = [];
   missileDestroy = 0;
@@ -186,16 +186,18 @@ function gameScreen() {
 
     if (
       actualJetX >= ironManGame.x - 260 &&
-      actualJetX <= ironManGame.x + 260 &&
+      actualJetX <= ironManGame.x + 40 &&
       actualJetY >= ironManGame.y - 260 &&
-      actualJetY <= ironManGame.y + 260
+      actualJetY <= ironManGame.y + 40
     ) {
       state = "lost";
+      resetGame();
       return;
     }
 
     if (jets[i].y > height) {
       state = "lost";
+      resetGame();
       return;
     }
   }
@@ -210,16 +212,18 @@ function gameScreen() {
 
       if (
         actualMissileX >= ironManGame.x - 260 &&
-        actualMissileX <= ironManGame.x + 260 &&
+        actualMissileX <= ironManGame.x + 40 &&
         actualMissileY >= ironManGame.y - 260 &&
-        actualMissileY <= ironManGame.y + 260
+        actualMissileY <= ironManGame.y + 40
       ) {
         state = "lost";
+        resetGame();
         return;
       }
 
       if (missile[i].y > height) {
         state = "lost";
+        resetGame();
         return;
       }
     }
